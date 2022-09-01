@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ title_pg }}{% endblock title %}
+
+{% block content %}
+<div class="card mb-3" style="padding: 50px;">
+    <h3 class="card-header">{{ object.title }}</h3>
+    <div class="text-center">
+        <img src="{{ object.thumbnail.url }}" class="img-fluid" alt="...">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <hr>
+        <h6 class="card-subtitle text-muted">{{ object.content }}</h6>
+    </div>
+    <ul>
+        <p class="list-group-item text-center">
+            <span><a href="{{ object.get_like_url }}" class="btn btn-outline-dark">Like</a> <i
+                    class="fa-solid fa-thumbs-up"></i> {{ object.get_like_count }} |</span>
+            <span>Vistas <i class="fa-solid fa-eye"></i> {{ object.get_view_count }} |</span>
+            <span>Comentarios <i class="fa-solid fa-comment"></i> {{ object.get_comment_count }} </span>
+        </p>
+        <div class="card-body">
+            <a class="btn btn-primary" href="{% url 'post:home' %}">Volver</a>
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'post:updatepost' object.id%}">Editar piblicacion</a>
+            {% endif %}
+        </div>
+        <div class="card-footer text-muted">
+            <small>Creado por: {{ object.autor }} - </small>
+            {{ object.publish_date|timesince }}
+        </div>
+        <h3>Comentarios <i class="fa-solid fa-comment"></i></h3>
+        {% for comment in object.comment %}
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">{{ comment.usuario }}</strong>
+                <small>{{ comment.timestamp|timesince }}</small>
+                <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ comment.coment }}
+            </div>
+        </div>
+        {% endfor %}
+        <h3>Comentar <i class="fa-solid fa-comment"></i></h3>
+        {% if request.user.is_authenticated %}
+        <form method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="{{ button }}">
+        </form>
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesión</a>
+        <a class="btn btn-primary" href="{% url 'post:nuevousuario' %}">Registrar</a>
+        {% endif %}
+    </ul>
+</div>
+{% endblock content %}

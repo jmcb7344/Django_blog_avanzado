@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title_pg }}{% endblock title %}
+
+{% block content %}
+<br>
+<ul>
+    <div class="row">
+    {% for object in object_list %}
+        <div class="col-2">
+            <div class="card" style="width: 18rem;">
+                <a href="{{ object.get_absolute_url }}">
+                <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+                </a>
+                <p class="card-text">{{ object.content }}</p>
+                <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Ver Post</a>
+                <p class="card-text">{{ object.publish_date|timesince }}</p>
+                </div>
+                <hr>
+                <p class="text-center">
+                    <span><i class="fa-solid fa-thumbs-up"></i> {{ object.get_like_count }} </span>
+                    <span><i class="fa-solid fa-eye"></i> {{ object.get_view_count }} </span>
+                    <span><i class="fa-solid fa-comment"></i> {{ object.get_comment_count }} </span>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</ul>
+<a class="btn btn-primary" href="{% url 'post:createpost' %}">nuevo post</a>
+{% endblock content %}

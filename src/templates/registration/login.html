@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<div class="contenedor fst-italic">
+    <h2>Login</h2>
+    <form method="POST">
+        <div class="form-group">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Usuario" name="username">
+                <label for="floatingInput">ID Usuario</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <label for="floatingPassword">Password</label>
+            </div>
+        </div>
+        <br>
+        <div class="d-grid gap-2">
+            <input class="btn btn-primary" type="submit" value="login">
+            <a class="btn btn-primary" href="{% url 'password_reset' %}" role="button">Recuperar password</a>
+            <a class="btn btn-primary" href="{% url 'post:home' %}" role="button">Volver</a>
+            {%csrf_token%}
+        </div>
+    </form>
+</div>
+{% endblock content %}
