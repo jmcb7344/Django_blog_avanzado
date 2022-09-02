@@ -8,6 +8,7 @@
 
 ------------
 
+![principp](https://user-images.githubusercontent.com/95278683/188040120-9498443b-d8ac-4cf5-a12d-068fe5f7b13a.png)
 
 ------------
 #### Descarga e instalación de la practica
@@ -32,3 +33,4 @@ Otros `$ .venv/bin/activate`
 `$ python manage.py runserver`
 
 ------------
+![comentarios](https://user-images.githubusercontent.com/95278683/188040156-b8bf29f2-5c2d-45ed-9438-96a3ae7960d7.png)
