@@ -72,9 +72,9 @@ class DeletePost(generic.DeleteView):
 
 class NuevoUser(generic.CreateView):
     model = User
-    template_name = 'registration/registro.html'
+    template_name = 'registro.html'
     form_class = forms.RegistroForm
-    success_url = reverse_lazy('post:login')
+    success_url = reverse_lazy('login')
     
 class LikeView(generic.View):
     def get(self, request, slug, *args, **kwargs):
